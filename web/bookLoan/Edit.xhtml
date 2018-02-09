@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="BookLoanEditDlg" widgetVar="BookLoanEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle2.EditBookLoanTitle}">
+            <h:form id="BookLoanEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{bookLoanController.selected != null}">
+                        <p:outputLabel value="#{bundle2.EditBookLoanLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{bookLoanController.selected.id}" title="#{bundle2.EditBookLoanTitle_id}" required="true" requiredMessage="#{bundle2.EditBookLoanRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle2.EditBookLoanLabel_loanedAt}" for="loanedAt" />
+                        <p:calendar id="loanedAt" pattern="MM/dd/yyyy HH:mm:ss" value="#{bookLoanController.selected.loanedAt}" title="#{bundle2.EditBookLoanTitle_loanedAt}" required="true" requiredMessage="#{bundle2.EditBookLoanRequiredMessage_loanedAt}" showOn="button"/>
+                        <p:outputLabel value="#{bundle2.EditBookLoanLabel_returnedAt}" for="returnedAt" />
+                        <p:calendar id="returnedAt" pattern="MM/dd/yyyy HH:mm:ss" value="#{bookLoanController.selected.returnedAt}" title="#{bundle2.EditBookLoanTitle_returnedAt}" required="true" requiredMessage="#{bundle2.EditBookLoanRequiredMessage_returnedAt}" showOn="button"/>
+                        <p:outputLabel value="#{bundle2.EditBookLoanLabel_memberId}" for="memberId" />
+                        <p:selectOneMenu id="memberId" value="#{bookLoanController.selected.memberId}" required="true" requiredMessage="#{bundle2.EditBookLoanRequiredMessage_memberId}">
+                            <f:selectItem itemLabel="#{bundle2.SelectOneMessage}"/>
+                            <f:selectItems value="#{member1Controller.itemsAvailableSelectOne}"
+                                           var="memberIdItem"
+                                           itemValue="#{memberIdItem}"/>
+                        </p:selectOneMenu>
+                        
+                        <p:outputLabel value="Book" for="bookId" />
+                        <p:selectOneMenu id="bookId" value="#{bookLoanController.selected.book}" required="true" requiredMessage="Book is required!">
+                            <f:selectItems value="#{bookController.itemsAvailableSelectOne}"
+                                           var="bookItem"
+                                           itemValue="#{bookItem}"/>
+                        </p:selectOneMenu>
+                        
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{bookLoanController.update}" value="#{bundle2.Save}" update="display,:BookLoanListForm:datalist,:growl" oncomplete="handleSubmit(args, 'BookLoanEditDialog');"/>
+                    <p:commandButton value="#{bundle2.Cancel}" onclick="BookLoanEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

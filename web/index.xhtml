@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Facelet Title</title>
+        <h:outputStylesheet name="css/jsfcrud.css"/>
+        
+        <style>
+            * {
+                margin: 0px;
+                padding: 0px;
+            }
+            
+            html, body {
+                height: 100%;
+            }
+            
+            #picture {
+                background-image: url(#{request.contextPath}/resources/images/library.jpg);
+                background-repeat: no-repeat;
+                width: 66%;
+                height: 100%;
+                float: left;
+            }
+            
+            .flex-container {
+                height: 100%;
+                padding: 0;
+                margin: 0;
+                display: -webkit-box;
+                display: -moz-box;
+                display: -ms-flexbox;
+                display: -webkit-flex;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .flex-item {
+                width: auto;
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <div id='picture'>
+            
+        </div>
+        <div class="flex-container">
+            <div class="flex-item">
+                <h1>Library</h1>
+                <br />
+                <h:link outcome="/author/List" value="Show All Author Items"/>
+                <br />
+                <h:link outcome="/book/List" value="Show All Book Items"/>
+                <br />
+                <h:link outcome="/address/List" value="Show All Address Items"/>
+                <br />
+                <h:link outcome="/bookLoan/List" value="Show All BookLoan Items"/>
+                <br />
+                <h:link outcome="/member1/List" value="Show All Member1 Items"/>
+                <br />
+                <h:link outcome="/membership/List" value="Show All Membership Items"/>
+            </div>
+        </div>
+    </h:body>
+</html>
+

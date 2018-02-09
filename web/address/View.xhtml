@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AddressViewDlg" widgetVar="AddressViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle2.ViewAddressTitle}">
+            <h:form id="AddressViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{addressController.selected != null}">
+                        <h:outputText value="#{bundle2.ViewAddressLabel_id}"/>
+                        <h:outputText value="#{addressController.selected.id}" title="#{bundle2.ViewAddressTitle_id}"/>
+                        <h:outputText value="#{bundle2.ViewAddressLabel_streetAndNumber}"/>
+                        <h:outputText value="#{addressController.selected.streetAndNumber}" title="#{bundle2.ViewAddressTitle_streetAndNumber}"/>
+                        <h:outputText value="#{bundle2.ViewAddressLabel_city}"/>
+                        <h:outputText value="#{addressController.selected.city}" title="#{bundle2.ViewAddressTitle_city}"/>
+                        <h:outputText value="#{bundle2.ViewAddressLabel_postcode}"/>
+                        <h:outputText value="#{addressController.selected.postcode}" title="#{bundle2.ViewAddressTitle_postcode}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle2.Close}" onclick="AddressViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

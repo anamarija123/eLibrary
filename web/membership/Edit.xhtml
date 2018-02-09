@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MembershipEditDlg" widgetVar="MembershipEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle2.EditMembershipTitle}">
+            <h:form id="MembershipEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{membershipController.selected != null}">
+                        <p:outputLabel value="#{bundle2.EditMembershipLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{membershipController.selected.id}" title="#{bundle2.EditMembershipTitle_id}" required="true" requiredMessage="#{bundle2.EditMembershipRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle2.EditMembershipLabel_amount}" for="amount" />
+                        <p:inputText id="amount" value="#{membershipController.selected.amount}" title="#{bundle2.EditMembershipTitle_amount}" required="true" requiredMessage="#{bundle2.EditMembershipRequiredMessage_amount}"/>
+                        <p:outputLabel value="#{bundle2.EditMembershipLabel_createdAt}" for="createdAt" />
+                        <p:calendar id="createdAt" pattern="MM/dd/yyyy HH:mm:ss" value="#{membershipController.selected.createdAt}" title="#{bundle2.EditMembershipTitle_createdAt}" required="true" requiredMessage="#{bundle2.EditMembershipRequiredMessage_createdAt}" showOn="button"/>
+                        <p:outputLabel value="#{bundle2.EditMembershipLabel_validThru}" for="validThru" />
+                        <p:calendar id="validThru" pattern="MM/dd/yyyy HH:mm:ss" value="#{membershipController.selected.validThru}" title="#{bundle2.EditMembershipTitle_validThru}" required="true" requiredMessage="#{bundle2.EditMembershipRequiredMessage_validThru}" showOn="button"/>
+                        <p:outputLabel value="#{bundle2.EditMembershipLabel_memberId}" for="memberId" />
+                        <p:selectOneMenu id="memberId" value="#{membershipController.selected.memberId}" required="true" requiredMessage="#{bundle2.EditMembershipRequiredMessage_memberId}">
+                            <f:selectItem itemLabel="#{bundle2.SelectOneMessage}"/>
+                            <f:selectItems value="#{member1Controller.itemsAvailableSelectOne}"
+                                           var="memberIdItem"
+                                           itemValue="#{memberIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{membershipController.update}" value="#{bundle2.Save}" update="display,:MembershipListForm:datalist,:growl" oncomplete="handleSubmit(args, 'MembershipEditDialog');"/>
+                    <p:commandButton value="#{bundle2.Cancel}" onclick="MembershipEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
